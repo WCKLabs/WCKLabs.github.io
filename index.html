@@ -75,6 +75,32 @@
       font-size: 0.75rem;
       color: #6b7280;
     }
+
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #ff6a00;
+    }
   </style>
 </head>
 <body>
@@ -97,6 +123,13 @@
       The button is intentionally disabled for now. Push subscription + backend will be
       added in a later iteration.
     </small>
+
+    <div class="footer">
+      <div class="footer-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms-and-conditions.html">Terms of Service</a>
+      </div>
+    </div>
   </main>
 
   <script>
