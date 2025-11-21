@@ -1,4 +1,4 @@
-// WCK Innovation Kitchen Labs — service worker skeleton
+// WCK Innovation Kitchen lab — service worker skeleton
 
 // Install: can be expanded later for asset caching.
 self.addEventListener("install", (event) => {
@@ -15,7 +15,7 @@ self.addEventListener("activate", (event) => {
 // Later, when we have a backend sending real Web Push messages,
 // we'll parse event.data and show a meaningful notification.
 self.addEventListener("push", (event) => {
-  let data = { title: "WCK Labs", body: "New update from WCK Innovation Kitchen." };
+  let data = { title: "WCK lab", body: "New update from WCK Innovation Kitchen." };
 
   try {
     if (event.data) {

@@ -1,6 +1,6 @@
 {
-  "name": "WCK Innovation Kitchen Labs",
-  "short_name": "WCK Labs",
+  "name": "WCK Innovation Kitchen lab",
+  "short_name": "WCK lab",
   "description": "Sandbox PWA for WCK Innovation Kitchen multi-channel onboarding and requests.",
   "start_url": "/",
   "scope": "/",
