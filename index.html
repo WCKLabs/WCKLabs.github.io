@@ -2,172 +2,359 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>WCK Innovation Kitchen lab</title>
+  <title>WCK Lab — Operational Tools for Coordination</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="WCK Lab develops lightweight digital tools that support operational coordination during emergencies and periods of disruption." />
 
   <!-- PWA manifest -->
   <link rel="manifest" href="/manifest.webmanifest" />
 
-  <!-- Basic theme color for address bar etc. -->
-  <meta name="theme-color" content="#ff6a00" />
+  <!-- Theme color -->
+  <meta name="theme-color" content="#1a1a2e" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f8fafc;
-      color: #111827;
-      display: flex;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: center;
+    :root {
+      --color-bg: #0f0f14;
+      --color-surface: #1a1a24;
+      --color-surface-elevated: #22222e;
+      --color-border: #2a2a3a;
+      --color-text: #e8e8ed;
+      --color-text-muted: #8888a0;
+      --color-accent: #ff6b35;
+      --color-accent-glow: rgba(255, 107, 53, 0.15);
+      --color-success: #10b981;
+      --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
-    .wrap {
-      max-width: 640px;
-      padding: 2.5rem 2rem;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,107,53,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,107,53,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      padding: 3rem 0 4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+    }
+
+    .logo::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
     h1 {
-      margin-top: 0;
-      font-size: 1.8rem;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin: 0 0 1.25rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
     }
 
-    p {
-      line-height: 1.5;
-      margin: 0.6rem 0;
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      max-width: 540px;
+      margin: 0 auto;
     }
 
-    .tag {
-      display: inline-block;
-      font-size: 0.75rem;
+    /* Sections */
+    section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2rem 2.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    section h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0 0 1rem;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+
+    section h2::before {
+      content: '';
+      width: 4px;
+      height: 1.125rem;
+      background: var(--color-accent);
+      border-radius: 2px;
+    }
+
+    section p {
+      margin: 0 0 1rem;
+      color: var(--color-text-muted);
+    }
+
+    section p:last-child {
+      margin-bottom: 0;
+    }
+
+    section ul {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    section li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.625rem;
+      color: var(--color-text-muted);
+    }
+
+    section li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+    }
+
+    section li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* SMS Details card */
+    .sms-details {
+      background: var(--color-surface-elevated);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .sms-details h3 {
+      font-size: 0.8125rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      background: #fee2e2;
-      color: #991b1b;
-      margin-bottom: 0.8rem;
+      color: var(--color-text);
+      margin: 0 0 0.875rem;
     }
 
-    button {
-      margin-top: 1.2rem;
-      padding: 0.7rem 1.4rem;
-      font-size: 0.95rem;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: #ff6a00;
-      color: white;
+    .sms-details ul {
+      display: grid;
+      gap: 0.5rem;
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: default;
+    .sms-details li {
+      font-size: 0.9375rem;
     }
 
-    small {
-      display: block;
-      margin-top: 0.6rem;
-      font-size: 0.75rem;
-      color: #6b7280;
+    /* Support section */
+    .support-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.9375rem;
+      color: var(--color-accent);
+      text-decoration: none;
+      padding: 0.625rem 1rem;
+      background: var(--color-accent-glow);
+      border-radius: 8px;
+      transition: background 0.2s ease;
     }
 
-    .footer {
-      margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #e5e7eb;
+    .support-email:hover {
+      background: rgba(255, 107, 53, 0.25);
+    }
+
+    /* Footer / Policies */
+    footer {
+      padding: 3rem 0 4rem;
       text-align: center;
-      font-size: 0.85rem;
-      color: #6b7280;
     }
 
-    .footer-links {
+    .policy-links {
       display: flex;
-      gap: 1.5rem;
       justify-content: center;
+      gap: 2rem;
       flex-wrap: wrap;
     }
 
-    .footer-links a {
-      color: #6b7280;
+    .policy-links a {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
       text-decoration: none;
-      transition: color 0.2s;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
     }
 
-    .footer-links a:hover {
-      color: #ff6a00;
+    .policy-links a:hover {
+      color: var(--color-text);
+      border-bottom-color: var(--color-accent);
+    }
+
+    .copyright {
+      margin-top: 2rem;
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        padding: 2rem 0 3rem;
+      }
+
+      section {
+        padding: 1.5rem 1.25rem;
+        border-radius: 12px;
+      }
+
+      .sms-details {
+        padding: 1rem 1.25rem;
+      }
+
+      .policy-links {
+        gap: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="tag">WCK lab · Sandbox</div>
-    <h1>WCK Innovation Kitchen lab</h1>
-    <p>
-      This is the sandbox landing page for multi‑channel chef onboarding and requests.
-      It will become an installable Progressive Web App (PWA) with push notifications.
-    </p>
-    <p>
-      For now this page is a <strong>bare‑bones shell</strong> that registers a service
-      worker. The real push subscription flow will be wired to Twilio + backend later.
-    </p>
+  <div class="container">
+    <header>
+      <div class="logo">WCK Lab</div>
+      <h1>Operational tools for coordination in moments that matter.</h1>
+      <p class="tagline">Lightweight digital tools that support frontline teams during emergencies and periods of disruption.</p>
+    </header>
 
-    <button id="enable-notifications" disabled>
-      Enable notifications (coming soon)
-    </button>
-    <small>
-      The button is intentionally disabled for now. Push subscription + backend will be
-      added in a later iteration.
-    </small>
- <section class="ik-optin-card">
-      <h2>Innovation Kitchen alerts</h2>
-      <p>
-        Innovation Kitchen is a World Central Kitchen pilot. We use SMS, WhatsApp, and RCS
-        messages to coordinate test and live meal support activations with chefs and partners.
-      </p>
+    <main>
+      <section>
+        <h2>What WCK Lab Does</h2>
+        <p>WCK Lab develops and pilots lightweight digital tools that support operational coordination during emergencies and periods of disruption.</p>
+        <p>These tools are designed for use by frontline teams and partners to:</p>
+        <ul>
+          <li>Share time-sensitive operational information</li>
+          <li>Support coordination across distributed teams</li>
+          <li>Reduce communication breakdowns during fast-moving events</li>
+        </ul>
+        <p style="margin-top: 1rem;">WCK Lab projects are deployed in limited, real-world contexts and refined based on operational needs.</p>
+      </section>
 
-      <form class="ik-optin-form">
-        <label for="ik-phone">Mobile phone number (example)</label>
-        <input
-          id="ik-phone"
-          type="tel"
-          placeholder="+1 555 555 5555"
-          disabled
-        />
-        <button type="button" disabled>
-          Agree and continue (pilot example)
-        </button>
-      </form>
+      <section>
+        <h2>Services</h2>
+        <p>WCK Lab provides:</p>
+        <ul>
+          <li>Operational coordination tools</li>
+          <li>Transactional messaging for field operations</li>
+          <li>Program and deployment notifications</li>
+          <li>Limited pilots with approved partners</li>
+        </ul>
+        <p style="margin-top: 1rem;">All services are used for operational and coordination purposes only.</p>
+      </section>
 
-      <p class="ik-consent-copy">
-        By signing up for Innovation Kitchen alerts, you agree to receive SMS, WhatsApp, and
-        RCS messages about Innovation Kitchen test and live activations. Message and data
-        rates may apply. Message frequency varies by activation. Reply HELP for help and
-        STOP to cancel at any time. Signing up is not required to receive meals or support
-        from World Central Kitchen.
-      </p>
+      <section>
+        <h2>SMS Program Information</h2>
+        <p>WCK Lab uses SMS messaging strictly for operational and transactional communications.</p>
+        <p>If you opt in, you may receive text messages related to:</p>
+        <ul>
+          <li>Operational updates</li>
+          <li>Coordination or deployment information</li>
+          <li>Program-related notifications</li>
+        </ul>
 
-      <p class="ik-legal-links">
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        ·
+        <div class="sms-details">
+          <h3>SMS Details</h3>
+          <ul>
+            <li>Message frequency varies</li>
+            <li>Message and data rates may apply</li>
+            <li>Reply STOP at any time to opt out</li>
+            <li>Reply HELP for assistance</li>
+            <li>Carriers are not liable for delayed or undelivered messages</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Support</h2>
+        <p>For questions or support, contact:</p>
+        <a href="mailto:support@wcklab.org" class="support-email">
+          <span>support@wcklab.org</span>
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <h2 style="font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin: 0 0 1rem;">Policies</h2>
+      <div class="policy-links">
         <a href="/terms-and-conditions.html">Terms of Service</a>
-      </p>
-    </section>
-
-    <div class="footer">
-      <div class="footer-links">
         <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/terms-and-conditions.html">Terms of Service</a>
       </div>
-    </div>
-  </main>
+      <p class="copyright">© 2025 WCK Lab</p>
+    </footer>
+  </div>
 
   <script>
-    // Basic service worker registration.
+    // Service worker registration for PWA support
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker
@@ -176,15 +363,6 @@
             console.error("Service worker registration failed:", err);
           });
       });
-    } else {
-      console.warn("Service workers are not supported in this browser.");
-    }
-
-    // Placeholder for future push subscription flow.
-    const btn = document.getElementById("enable-notifications");
-    if ("Notification" in window && "serviceWorker" in navigator) {
-      // Button stays disabled until we implement push logic.
-      btn.disabled = true;
     }
   </script>
 </body>

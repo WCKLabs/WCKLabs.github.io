@@ -1,12 +1,12 @@
 {
-  "name": "WCK Innovation Kitchen lab",
-  "short_name": "WCK lab",
-  "description": "Sandbox PWA for WCK Innovation Kitchen multi-channel onboarding and requests.",
+  "name": "WCK Lab",
+  "short_name": "WCK Lab",
+  "description": "Operational tools for coordination in moments that matter.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff6a00",
+  "background_color": "#0f0f14",
+  "theme_color": "#1a1a2e",
   "icons": [
     {
       "src": "/icons/icon-192.png",
